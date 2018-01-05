@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>1 EURO</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="js/howler.min.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+    var index_start = 1;
+    var is_playing = true;
+    var index_end = 34;
+    var rnd_pointer = 0;
+    var crr_sample_count = 0;
+    var sampleBank1 = new Array(); //array with short samples (Howls)
+    var bgLoop1;
+
+    function play_bg_euro(val) {
+        bgLoop1 = new Howl( // background loop
+            {
+                urls: [val],
+                autoplay: true,
+                loop: true,
+                volume: 1,
+                onload: function() {
+                    console.log('background loop loaded');
+                },
+                onend: function() {
+                    console.log('background loop finished, starting over');
+                }
+            });
+    };
+
+    function play_samples_euro(val) {
+        $.ajax({
+            url: val,
+            success: function(data) {
+                $(data).find("a").attr("href", function(i, value) {
+                    i = i - 5;
+                    if (value.match(/\.(mp3|wav|ogg)$/)) {
+                        sampleBank1[i] = new Howl({
+                            urls: [value],
+                            volume: 0.8,
+                            onload: function() {
+                                console.log('euro sample loaded');
+                            },
+                            onend: function() {
+                                console.log('finished playing euro sample #' + rnd_pointer);
+                                play_euro();
+                            }
+                        });
+                    }
+                }), play_euro();
+            }
+        })
+    };
+
+    function next_rnd_pointer() {
+        rnd_pointer = Math.floor((Math.random() * 33) + 1);
+    }
+
+    function play_euro() {
+        next_rnd_pointer();
+        console.log("starting playing euro sample #" + rnd_pointer);
+        sampleBank1[rnd_pointer].play();
+        is_playing = true;
+    }
+
+    function stop_euro() {
+        bgLoop1.stop();
+        sampleBank1[rnd_pointer].stop();
+        is_playing = false;
+    }
+    $(function() {
+        console.log("loading samples and background loop!");
+        //background sound starts first, samples afterwards via callback
+        play_bg_euro('sound/marketplace_drone.mp3'), play_samples_euro('sound/192_selected');
+        // $('.scapeSwitch').click(function() // sounscape selector button function
+        //     {
+        //         stop_euro();
+        //         play_bg_euro($(this).attr('data-loop')), play_samples_euro($(this).attr('data-samples'));
+        //     });
+        $('#sound-mute').click(function() // mute button function
+            {
+                $(this).toggleClass('fa-volume-up  fa-volume-off');
+                if (is_playing) {
+                    is_playing = false;
+                    Howler.mute();
+                    console.log("muted");
+                } else {
+                    is_playing = true;
+                    Howler.unmute();
+                    console.log("unmuted");
+                }
+            });
+    });
+    </script>
+</head>
+
+<body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!--     <li>
+                        <a href="#back">
+                            <i class="fa fa-arrow-left"></i>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="#" id="sound-mute" class=" text-left fa fa-volume-up">
+                            <i></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <span class=" navbar-brand">You are listening to the random drone soundscape of the
+                            <a target="_blank" href="https://goo.gl/F0iqTS">Konsti</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12  text-center">
+                <h1 id="euro_headline" class="euro  text-center"> 1EURO </h1>
+            </div>
+            <div class=" col-md-12  text-center">
+                <h2 class="lead">*make sure your sound is on.
+                    <br> loads 10MB of sound samples</h2>
+            </div>
+        </div>
+        <div id="about" class="row">
+            <div class="col-md-12  "> All soundscapes are based on authentic recordings. 1EURO is a minimalistic random audio pattern generator driven by
+                <a href="https://github.com/goldfire/howler.js/">howler.js</a> via
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>. It plays a long loop and simultaneously fires short samples in random order. Was used offline to drive audio installations. Feel free to adobt this project to your needs under GPL. Use 1EURO for creating your own soundcapes. Just throw new samples in and your personal generator is ready. Recoded sessions of 1EURO are free available under the CC 3.0 lisence. Tag your soundscapes with #1EURO, #SOUNDSCAPE, #DRONE to share your works. </div>
+        </div>
+    </div>
+</body>
+
+</html>
