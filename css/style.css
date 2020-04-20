@@ -1,30 +1,24 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,900|Noto+Serif|Noto+Sans:400,700);
-
 /*MAIN MODS*/
-
 ::selection {
     background: rgba(167, 255, 35, 0.5);
     /* WebKit/Blink Browsers */
 }
-
 ::-moz-selection {
     background: rgba(167, 255, 35, 0.5);
     /* Gecko Browsers */
 }
-
 html,
 body {
     height: 100%;
     width: 100% font-family: 'Noto Sans', sans-serif;
 }
-
 .navbar>a {
     padding-top: 5px;
     /*    height: 15px;
     margin-top: 5px;
 */
 }
-
 h1,
 h2,
 h3,
@@ -32,34 +26,24 @@ h4,
 h5 {
     font-family: 'Noto Serif', serif;
 }
-
 a:link {
     text-decoration: none;
 }
-
-
 /*GENERAL CLASSES*/
-
 .paratron {
-    background-color: rgba( 0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     color: rgba(255, 255, 255, 1);
 }
-
 .lead {
     font-family: 'Roboto', sans-serif;
 }
-
 .euro {
     font-weight: 900;
 }
-
 #tubular-container {
     z-index: -999;
 }
-
-
 /*TOP SECTION*/
-
 #euro_1 {
     /*min-height: 500px;*/
     padding-top: 50px;
@@ -67,7 +51,6 @@ a:link {
     /*box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.6);*/
     /*text-shadow: 0px 0px 7px rgba(0, 0, 0, 0.75);*/
 }
-
 #euro_headline {
     height: 120px;
     width: 350px;
@@ -85,7 +68,6 @@ a:link {
     text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7), 0px 2px 0px rgba(255, 255, 255, 0.6), 0px 3px 0px rgba(255, 255, 255, 0.5), 0px 4px 0px rgba(255, 255, 255, 0.4), 0px 5px 0px rgba(255, 255, 255, 0.3), 0px 6px 0px rgba(255, 255, 255, 0.2), 0px 7px 7px rgba(255, 255, 255, 0.1);
     /*box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7), 0px 2px 0px rgba(255, 255, 255, 0.6), 0px 3px 0px rgba(255, 255, 255, 0.5), 0px 4px 0px rgba(255, 255, 255, 0.4), 0px 5px 0px rgba(255, 255, 255, 0.3), 0px 6px 0px rgba(255, 255, 255, 0.2), 0px 7px 7px rgba(255, 255, 255, 0.1);*/
 }
-
 #euro_subline {
     /*color: rgba(255, 255, 255, 1);*/
     /*font-size: 54px;*/
@@ -93,7 +75,6 @@ a:link {
     line-height: 48px;
     /*text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7), 0px 2px 0px rgba(255, 255, 255, 0.6), 0px 3px 0px rgba(255, 255, 255, 0.5), 0px 4px 0px rgba(255, 255, 255, 0.4), 0px 5px 0px rgba(255, 255, 255, 0.3), 0px 6px 0px rgba(255, 255, 255, 0.2), 0px 7px 7px rgba(255, 255, 255, 0.1);*/
 }
-
 #sound-mute {
     font-size: 18px;
     /*margin-top: 10px;*/
@@ -101,32 +82,11 @@ a:link {
     /*height: 50px;*/
     width: 70px;
 }
-
-
 /*ABOUT SECTION*/
-
 #about {
     padding-top: 40px;
 }
-
-
 /*SHARE SECTION*/
-
 #share {
     padding-bottom: 160px;
 }
-
-
-/* NAVBAR*/
-
-
-/*.navbar-brand, .navbar-nav>li>a {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.navbar-nav>.active>a {
-    opacity: .6;
-}
-*/
