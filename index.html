@@ -12,95 +12,6 @@
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript">
-    var index_start = 1;
-    var is_playing = true;
-    var index_end = 34;
-    var rnd_pointer = 0;
-    var crr_sample_count = 0;
-    var sampleBank1 = new Array(); //array with short samples (Howls)
-    var bgLoop1;
-
-    function play_bg_euro(val) {
-        bgLoop1 = new Howl( // background loop
-            {
-                urls: [val],
-                autoplay: true,
-                loop: true,
-                volume: 1,
-                onload: function() {
-                    console.log('background loop loaded');
-                },
-                onend: function() {
-                    console.log('background loop finished, starting over');
-                }
-            });
-    };
-
-    function play_samples_euro(val) {
-        $.ajax({
-            url: val,
-            success: function(data) {
-                $(data).find("a").attr("href", function(i, value) {
-                    i = i - 5;
-                    if (value.match(/\.(mp3|wav|ogg)$/)) {
-                        sampleBank1[i] = new Howl({
-                            urls: [value],
-                            volume: 0.8,
-                            onload: function() {
-                                console.log('euro sample loaded');
-                            },
-                            onend: function() {
-                                console.log('finished playing euro sample #' + rnd_pointer);
-                                play_euro();
-                            }
-                        });
-                    }
-                }), play_euro();
-            }
-        })
-    };
-
-    function next_rnd_pointer() {
-        rnd_pointer = Math.floor((Math.random() * 33) + 1);
-    }
-
-    function play_euro() {
-        next_rnd_pointer();
-        console.log("starting playing euro sample #" + rnd_pointer);
-        sampleBank1[rnd_pointer].play();
-        is_playing = true;
-    }
-
-    function stop_euro() {
-        bgLoop1.stop();
-        sampleBank1[rnd_pointer].stop();
-        is_playing = false;
-    }
-    $(function() {
-        console.log("loading samples and background loop!");
-        //background sound starts first, samples afterwards via callback
-        play_bg_euro('sound/marketplace_drone.mp3'), play_samples_euro('sound/192_selected');
-        // $('.scapeSwitch').click(function() // sounscape selector button function
-        //     {
-        //         stop_euro();
-        //         play_bg_euro($(this).attr('data-loop')), play_samples_euro($(this).attr('data-samples'));
-        //     });
-        $('#sound-mute').click(function() // mute button function
-            {
-                $(this).toggleClass('fa-volume-up  fa-volume-off');
-                if (is_playing) {
-                    is_playing = false;
-                    Howler.mute();
-                    console.log("muted");
-                } else {
-                    is_playing = true;
-                    Howler.unmute();
-                    console.log("unmuted");
-                }
-            });
-    });
-    </script>
 </head>
 
 <body>
@@ -155,6 +66,7 @@
                 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>. It plays a long loop and simultaneously fires short samples in random order. Was used offline to drive audio installations. Feel free to adobt this project to your needs under GPL. Use 1EURO for creating your own soundcapes. Just throw new samples in and your personal generator is ready. Recoded sessions of 1EURO are free available under the CC 3.0 lisence. Tag your soundscapes with #1EURO, #SOUNDSCAPE, #DRONE to share your works. </div>
         </div>
     </div>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
